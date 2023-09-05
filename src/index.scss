@@ -1,10 +1,15 @@
+@import "variables";
+
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
     //outline: 1px solid red;
+    font-family: PT Sans, serif;
+    font-style: normal;
 }
 
 html {
     scroll-behavior: smooth;
+    background: $Light-grey;
 }
