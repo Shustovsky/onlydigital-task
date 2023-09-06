@@ -1,6 +1,6 @@
 import { TextSlider } from './components/TextSlider.tsx';
 import style from './App.module.scss';
-import { dataNews } from './assets/dataNews.ts';
+import { dataNews } from './assets/mock/dataNews.ts';
 
 export function App() {
   return (

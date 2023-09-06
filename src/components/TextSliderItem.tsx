@@ -1,4 +1,4 @@
-import { IDataNews } from '../assets/dataNews.ts';
+import { IDataNews } from '../assets/mock/dataNews.ts';
 import style from './Slide.module.scss';
 
 export function TextSliderItem({ data }: { data: IDataNews }) {
