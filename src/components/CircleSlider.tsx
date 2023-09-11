@@ -1,7 +1,7 @@
 import style from './CircleSlider.module.scss';
 import { DataDateType } from '../assets/mock/dataNews.ts';
 import array from '../assets/img/array-grey.svg';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 type CircleSliderType = {
   dataDates: DataDateType[];
@@ -9,8 +9,11 @@ type CircleSliderType = {
 };
 
 export function CircleSlider({ dataDates, dataEvents }: CircleSliderType) {
+  // console.log(dataDates);
   const [dateIndex, setDateIndex] = useState(0);
-  const { startDate, endDate } = dataDates[dateIndex];
+  // const { startDate, endDate } = dataDates[dateIndex];
+  const [startDate, setStartDate] = useState(dataDates[dateIndex].startDate);
+  const [endDate, setEndDate] = useState(dataDates[dateIndex].endDate);
   const [showLabelIndex, setShowLabelIndex] = useState(-1);
 
   const angleIncrement = (2 * Math.PI) / dataEvents.length;
@@ -21,17 +24,32 @@ export function CircleSlider({ dataDates, dataEvents }: CircleSliderType) {
     return { x, y };
   });
 
-  const incIndexDate = () => {
-    setDateIndex((prevState) => {
-      return prevState < dataDates.length - 1 ? prevState + 1 : 0;
-    });
+  const nextDate = () => {
+    setDateIndex((prevState) => (prevState < dataDates.length - 1 ? prevState + 1 : 0));
   };
 
-  const decIndexDate = () => {
-    setDateIndex((prevState) => {
-      return prevState === 0 ? dataDates.length - 1 : prevState - 1;
-    });
+  const prevDate = () => {
+    setDateIndex((prevState) => (prevState === 0 ? dataDates.length - 1 : prevState - 1));
   };
+
+  useEffect(() => {
+    const interval = setTimeout(() => {
+      if (startDate < dataDates[dateIndex].startDate) {
+        setStartDate((prevState) => prevState + 1);
+      }
+      if (startDate > dataDates[dateIndex].startDate) {
+        setStartDate((prevState) => prevState - 1);
+      }
+
+      if (endDate < dataDates[dateIndex].endDate) {
+        setEndDate((prevState) => prevState + 1);
+      }
+      if (endDate > dataDates[dateIndex].endDate) {
+        setEndDate((prevState) => prevState - 1);
+      }
+    }, 50);
+    return () => clearInterval(interval);
+  }, [nextDate]);
 
   return (
     <>
@@ -78,10 +96,10 @@ export function CircleSlider({ dataDates, dataEvents }: CircleSliderType) {
         <span>{('00' + dataEvents.length).slice(-2)}</span>
       </div>
       <div className={style['navigation-array']}>
-        <button onClick={decIndexDate}>
+        <button onClick={prevDate}>
           <img src={array} alt="array prev" />
         </button>
-        <button onClick={incIndexDate}>
+        <button onClick={nextDate}>
           <img src={array} alt="array prev" />
         </button>
       </div>
