@@ -78,6 +78,12 @@
         border: none;
         opacity: 0.5;
         cursor: pointer;
+        border-radius: 100%;
+        transition: all 0.3s;
+
+        &:hover {
+            background-color: $White;
+        }
 
         &:last-child {
             transform: rotate(180deg);
@@ -113,7 +119,7 @@
     cursor: pointer;
     transition: all 0.3s;
 
-    &-text{
+    &-text {
         width: 150px;
     }
 
