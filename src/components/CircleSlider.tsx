@@ -1,36 +1,35 @@
+import React, { useEffect, useState } from 'react';
 import style from './CircleSlider.module.scss';
-import { DataDateType } from '../assets/mock/dataNews.ts';
 import array from '../assets/img/array-grey.svg';
-import { useEffect, useState } from 'react';
 import { calculatePointCoordinates } from '../utils/calculatePointCoordinates.ts';
+import { DataType } from '../assets/mock/data.ts';
 
 type CircleSliderType = {
-  dataDates: DataDateType[];
-  dataEvents: string[];
+  data: DataType[];
+  slideIndex: number;
+  setSlideIndex: React.Dispatch<React.SetStateAction<number>>;
 };
 
-export function CircleSlider({ dataDates, dataEvents }: CircleSliderType) {
-  const [dateIndex, setDateIndex] = useState(0);
-  const [startDate, setStartDate] = useState(dataDates[dateIndex].startDate);
-  const [endDate, setEndDate] = useState(dataDates[dateIndex].endDate);
+export function CircleSlider({ data, slideIndex, setSlideIndex }: CircleSliderType) {
+  const [startDate, setStartDate] = useState(data[slideIndex].date.startDate);
+  const [endDate, setEndDate] = useState(data[slideIndex].date.endDate);
   const [showLabelIndex, setShowLabelIndex] = useState(-1);
-
-  const points = dataEvents.map((_, index) => calculatePointCoordinates(index, dataEvents.length));
+  const points = data.map((_, index) => calculatePointCoordinates(index, data.length));
 
   const updateDates = () => {
-    const startDateDiff = dataDates[dateIndex].startDate - startDate;
-    const endDateDiff = dataDates[dateIndex].endDate - endDate;
+    const startDateDiff = data[slideIndex].date.startDate - startDate;
+    const endDateDiff = data[slideIndex].date.endDate - endDate;
 
     setStartDate((prevState) => prevState + Math.sign(startDateDiff));
     setEndDate((prevState) => prevState + Math.sign(endDateDiff));
   };
 
   const nextDate = () => {
-    setDateIndex((prevState) => (prevState < dataDates.length - 1 ? prevState + 1 : 0));
+    setSlideIndex((prevState) => (prevState < data.length - 1 ? prevState + 1 : 0));
   };
 
   const prevDate = () => {
-    setDateIndex((prevState) => (prevState === 0 ? dataDates.length - 1 : prevState - 1));
+    setSlideIndex((prevState) => (prevState === 0 ? data.length - 1 : prevState - 1));
   };
 
   useEffect(() => {
@@ -50,6 +49,7 @@ export function CircleSlider({ dataDates, dataEvents }: CircleSliderType) {
               className={style.pointContainer}
               onMouseEnter={() => setShowLabelIndex(index)}
               onMouseLeave={() => setShowLabelIndex(-1)}
+              // style={{ transform: 'rotate(0.85turn) translate(-50%, -50%)' }}
             >
               <div
                 className={style.point}
@@ -58,16 +58,30 @@ export function CircleSlider({ dataDates, dataEvents }: CircleSliderType) {
                   top: `${point.y}rem`,
                 }}
               ></div>
-              {showLabelIndex === index && (
+              {slideIndex === index && (
                 <div
                   style={{
-                    left: `${point.x - 1.5}rem`,
-                    top: `${point.y - 1.5}rem`,
+                    left: `${point.x}rem`,
+                    top: `${point.y}rem`,
+                    transform: 'translate(-13.5%, -49.5%)',
                   }}
                   className={style.label}
                 >
                   <div className={style['label-circle']}>{index + 1}</div>
-                  {dataEvents[index]}
+                  <div className={style['label-text']}>{data[index].title}</div>
+                </div>
+              )}
+              {showLabelIndex === index && (
+                <div
+                  style={{
+                    left: `${point.x}rem`,
+                    top: `${point.y}rem`,
+                    transform: 'translate(-50%, -50%)',
+                  }}
+                  className={style.label}
+                  onClick={() => setSlideIndex(index)}
+                >
+                  <div className={style['label-circle']}>{index + 1}</div>
                 </div>
               )}
             </div>
@@ -80,9 +94,9 @@ export function CircleSlider({ dataDates, dataEvents }: CircleSliderType) {
         </div>
       </div>
       <div className={style.counter}>
-        <span>{('00' + (dateIndex + 1)).slice(-2)}</span>
+        <span>{('00' + (slideIndex + 1)).slice(-2)}</span>
         <span>{'/'}</span>
-        <span>{('00' + dataEvents.length).slice(-2)}</span>
+        <span>{('00' + data.length).slice(-2)}</span>
       </div>
       <div className={style['navigation-array']}>
         <button onClick={prevDate}>

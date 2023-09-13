@@ -4,11 +4,11 @@ import 'swiper/css';
 import { TextSliderItem } from './TextSliderItem.tsx';
 import array from '../assets/img/array.svg';
 import styles from './TextSlider.module.scss';
-import { IDataNews } from '../assets/mock/dataNews.ts';
 import { v4 as uuidv4 } from 'uuid';
+import { NewsType } from '../assets/mock/data.ts';
 
 type dataType = {
-  data: IDataNews[];
+  data: NewsType[];
 };
 
 export function TextSlider({ data }: dataType) {
