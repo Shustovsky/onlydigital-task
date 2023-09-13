@@ -1,4 +1,4 @@
-import style from './Slide.module.scss';
+import style from './TextSliderItem.module.scss';
 import { NewsType } from '../assets/mock/data.ts';
 
 export function TextSliderItem({ data }: { data: NewsType }) {
