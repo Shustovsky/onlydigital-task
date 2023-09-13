@@ -1,6 +1,6 @@
-import { TextSlider } from './../components/TextSlider.tsx';
+import { TextSlider } from './TextSlider.tsx';
 import style from './Section.module.scss';
-import { CircleSlider } from './../components/CircleSlider.tsx';
+import { CircleSlider } from './CircleSlider.tsx';
 import { DataType } from '../assets/mock/data.ts';
 import { useState } from 'react';
 
