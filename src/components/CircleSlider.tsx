@@ -49,7 +49,7 @@ export function CircleSlider({ data, slideIndex, setSlideIndex }: CircleSliderTy
               className={style.pointContainer}
               onMouseEnter={() => setShowLabelIndex(index)}
               onMouseLeave={() => setShowLabelIndex(-1)}
-              // style={{ transform: 'rotate(0.85turn) translate(-50%, -50%)' }}
+              // style={{ transform: `rotate(${(slideIndex + 1) * 0.85}turn)` }}
             >
               <div
                 className={style.point}
@@ -63,6 +63,7 @@ export function CircleSlider({ data, slideIndex, setSlideIndex }: CircleSliderTy
                   style={{
                     left: `${point.x}rem`,
                     top: `${point.y}rem`,
+                    // transform: `rotate(${(slideIndex + 1) * -0.85}turn) translate(-4%, 119%)`,
                     transform: 'translate(-13.5%, -49.5%)',
                   }}
                   className={style.label}
@@ -76,6 +77,7 @@ export function CircleSlider({ data, slideIndex, setSlideIndex }: CircleSliderTy
                   style={{
                     left: `${point.x}rem`,
                     top: `${point.y}rem`,
+                    // transform: 'rotate(-0.85turn) translate(-70%, 10%)',
                     transform: 'translate(-50%, -50%)',
                   }}
                   className={style.label}
