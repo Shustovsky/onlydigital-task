@@ -4,7 +4,11 @@ import { CircleSlider } from './CircleSlider.tsx';
 import { DataType } from '../assets/mock/data.ts';
 import { useState } from 'react';
 
-export function Section({ data }: { data: DataType[] }) {
+type SectionType = {
+  data: DataType[];
+};
+
+export function Section({ data }: SectionType) {
   const [slideIndex, setSlideIndex] = useState(0);
 
   return (
