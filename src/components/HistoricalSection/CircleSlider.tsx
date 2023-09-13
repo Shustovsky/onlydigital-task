@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import style from './CircleSlider.module.scss';
-import array from '../assets/img/array-grey.svg';
-import { calculatePointCoordinates } from '../utils/calculatePointCoordinates.ts';
-import { DataType } from '../assets/mock/data.ts';
+import array from '../../assets/img/array-grey.svg';
+import { calculatePointCoordinates } from '../../utils/calculatePointCoordinates.ts';
+import { DataType } from '../../assets/mock/data.ts';
 
 type CircleSliderType = {
   data: DataType[];

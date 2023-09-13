@@ -2,10 +2,10 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import { TextSliderItem } from './TextSliderItem.tsx';
-import array from '../assets/img/array.svg';
+import array from '../../assets/img/array.svg';
 import styles from './TextSlider.module.scss';
 import { v4 as uuidv4 } from 'uuid';
-import { NewsType } from '../assets/mock/data.ts';
+import { NewsType } from '../../assets/mock/data.ts';
 
 type dataType = {
   data: NewsType[];

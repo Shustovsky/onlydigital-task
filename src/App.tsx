@@ -1,10 +1,10 @@
-import { HistoricalSections } from './components/HistoricalSections.tsx';
+import { HistoricalSection } from './components/HistoricalSection.tsx';
 import { data } from './assets/mock/data.ts';
 
 export function App() {
   return (
     <>
-      <HistoricalSections data={data} />
+      <HistoricalSection data={data} />
     </>
   );
 }

@@ -1,6 +1,6 @@
-import { TextSlider } from './TextSlider.tsx';
-import style from './HistoricalSections.module.scss';
-import { CircleSlider } from './CircleSlider.tsx';
+import { TextSlider } from './HistoricalSection/TextSlider.tsx';
+import style from './HistoricalSection.module.scss';
+import { CircleSlider } from './HistoricalSection/CircleSlider.tsx';
 import { DataType } from '../assets/mock/data.ts';
 import { useState } from 'react';
 
@@ -8,7 +8,7 @@ type SectionType = {
   data: DataType[];
 };
 
-export function HistoricalSections({ data }: SectionType) {
+export function HistoricalSection({ data }: SectionType) {
   const [slideIndex, setSlideIndex] = useState(0);
 
   return (
